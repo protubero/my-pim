@@ -20,7 +20,12 @@ import org.vaadin.lineawesome.LineAwesomeIcon;
  */
 public class MainLayout extends AppLayout {
 
-    private H2 viewTitle;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4146960873756980400L;
+	
+	private H2 viewTitle;
 
     public MainLayout() {
         setPrimarySection(Section.DRAWER);
@@ -50,9 +55,11 @@ public class MainLayout extends AppLayout {
 
     private SideNav createNavigation() {
         SideNav nav = new SideNav();
-
+        
         nav.addItem(new SideNavItem("Hello World", HelloWorldView.class, LineAwesomeIcon.GLOBE_SOLID.create()));
-        nav.addItem(new SideNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create()));
+        SideNavItem sideNavItem = new SideNavItem("About", AboutView.class, LineAwesomeIcon.FILE.create());
+        sideNavItem.addItem(new SideNavItem("About sub", AboutView.class, LineAwesomeIcon.FILE.create()));
+		nav.addItem(sideNavItem);
 
         return nav;
     }
