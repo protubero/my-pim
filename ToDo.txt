@@ -1,0 +1,26 @@
+Markdown
+	Tabs extension
+	More Extensions (OTANE) ?
+	highlight.js
+	
+Abstraction Layer
+	Menus
+	Pages
+		Page Context Renderer
+		
+Tag Managing
+	Add/Remove Tags
+	Validate Tags
+	Tag Rules
+	
+Bean Store
+	Automated Tests
+	Tags
+	File Reference Manager
+	(Ignore Annotation, Entity Relation)
+	Auto-Release, Protected Main branch
+
+Generate PDF
+	https://pptr.dev/guides/docker
+	https://blog.risingstack.com/pdf-from-html-node-js-puppeteer/	
+	

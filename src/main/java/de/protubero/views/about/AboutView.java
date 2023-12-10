@@ -1,5 +1,13 @@
 package de.protubero.views.about;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.commonmark.Extension;
+import org.commonmark.ext.autolink.AutolinkExtension;
+import org.commonmark.ext.gfm.strikethrough.StrikethroughExtension;
+import org.commonmark.ext.gfm.tables.TablesExtension;
+import org.commonmark.ext.ins.InsExtension;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 
@@ -46,8 +54,12 @@ public class AboutView extends VerticalLayout {
                     .setHelperText(e.getValue().length() + "/500");
             Node document = parser.parse(e.getValue());
             Builder builder = VaadinRenderer.builder();
-            TablesExtension tablesExt = new TablesExtension();
-            builder.extensions(tablesExt);
+            List<Extension> extensions = new ArrayList<>();
+            extensions.add(TablesExtension.create());
+            extensions.add(InsExtension.create());
+            extensions.add(AutolinkExtension.create());
+            extensions.add(StrikethroughExtension.builder().build());
+            builder.extensions(extensions);
 			VaadinRenderer renderer = builder.build();
             renderedArea.removeAll();
             renderedArea.add(renderer.render(document));
