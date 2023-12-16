@@ -1,7 +1,3 @@
-Markdown
-	Tabs extension
-	More Extensions (OTANE) ?
-	highlight.js
 	
 Abstraction Layer
 	Menus
@@ -12,15 +8,30 @@ Tag Managing
 	Add/Remove Tags
 	Validate Tags
 	Tag Rules
-	
-Bean Store
-	Automated Tests
-	Tags
-	File Reference Manager
-	(Ignore Annotation, Entity Relation)
-	Auto-Release, Protected Main branch
+
+------------------------------	
+
+Markdown extensions
+	Tabs extension
+	More Extensions (OTANE) ?
+	highlight.js
+	Mermaid
+
 
 Generate PDF
 	https://pptr.dev/guides/docker
 	https://blog.risingstack.com/pdf-from-html-node-js-puppeteer/	
 	
+Unstructured Pages 
+	Add Logic
+	Re-Ordering
+	Per-Entity Editor
+	Document Types
+		Validation
+		
+		
+Long-running jobs
+	like PDF Generation 		
+		
+		
+		
