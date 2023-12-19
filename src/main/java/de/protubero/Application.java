@@ -21,8 +21,6 @@ public class Application implements AppShellConfigurator {
 	 * 
 	 */
 	private static final long serialVersionUID = 2278257127437634221L;
-
-	
 	
 	public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

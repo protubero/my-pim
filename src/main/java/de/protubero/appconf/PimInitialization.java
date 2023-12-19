@@ -1,6 +1,4 @@
-package de.protubero;
-
-import de.protubero.appdef.PimApplicationConfig;
+package de.protubero.appconf;
 
 public interface PimInitialization {
 

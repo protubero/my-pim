@@ -14,8 +14,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouteParameters;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import de.protubero.appdef.PimApplicationConfig;
-import de.protubero.appdef.PimApplicationModel;
+import de.protubero.appconf.PimApplicationConfig;
+import de.protubero.appconf.PimApplicationModel;
 import de.protubero.views.about.AboutView;
 import de.protubero.views.helloworld.HelloWorldView;
 
