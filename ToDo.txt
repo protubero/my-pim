@@ -1,8 +1,23 @@
 	
 Abstraction Layer
 	Menus
+	https://vaadin.com/docs/latest/routing/dynamic
+		
 	Pages
+		ComponentListPage
+		
+	Components (expandable flag)	
+		ToDoItem
+		Section
 		Page Context Renderer
+		List Pages
+			table
+			expanded
+		Single Item Pages
+		Tag-based single Item Pages
+	Editors
+	Viewers	
+------------------------------			
 		
 Tag Managing
 	Add/Remove Tags
@@ -10,6 +25,16 @@ Tag Managing
 	Tag Rules
 
 ------------------------------	
+
+MultiPart Pages 
+	Add Logic
+	Re-Ordering
+	Per-Entity Editor
+	Document Types
+		Validation
+		
+------------------------------	
+
 
 Markdown extensions
 	Tabs extension
@@ -19,16 +44,11 @@ Markdown extensions
 
 
 Generate PDF
-	https://pptr.dev/guides/docker
-	https://blog.risingstack.com/pdf-from-html-node-js-puppeteer/	
+
+
+Static Site Generation
+	GraphQL?
 	
-Unstructured Pages 
-	Add Logic
-	Re-Ordering
-	Per-Entity Editor
-	Document Types
-		Validation
-		
 		
 Long-running jobs
 	like PDF Generation 		

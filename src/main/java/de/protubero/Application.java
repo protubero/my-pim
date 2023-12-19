@@ -17,7 +17,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Theme(value = "my-pim", variant = Lumo.DARK)
 public class Application implements AppShellConfigurator {
 
-    public static void main(String[] args) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2278257127437634221L;
+
+	
+	
+	public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 

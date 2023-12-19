@@ -1,8 +1,7 @@
 package de.protubero.pdf;
 
-public class PageGenerationContext {
+public interface PageGenerationContext {
 
-
-	TextGenerationContext text();
+	void append(String html);
 	
 }
