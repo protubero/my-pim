@@ -11,10 +11,10 @@ public class FirstPimInitialization implements PimInitialization {
 
 	@Override
 	public void init(PimApplicationConfig appConf) {
-		PimPage page = appConf.createPage("eins");
+		PimPage page = appConf.createPage("eins", DemoPageHandler.class);
 
-		appConf.menuItem("One", page);
-		appConf.menuItem("One param", page, "abc");
+		appConf.menuItem("One", DemoPageHandler.class);
+		appConf.menuItem("One param", DemoPageHandler.class, "abc");
 	}
 
 }

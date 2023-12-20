@@ -43,6 +43,6 @@ public class ApplicationServiceInitListener implements VaadinServiceInitListener
 		model.init(appConf);
 
 		log.info("Create Routes");
-		model.createRoutes();
+		//model.createRoutes();
 	}
 }

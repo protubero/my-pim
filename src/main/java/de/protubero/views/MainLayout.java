@@ -1,5 +1,7 @@
 package de.protubero.views;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -8,23 +10,16 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.Scroller;
-import com.vaadin.flow.component.sidenav.SideNav;
-import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.RouteParameters;
+import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
-import de.protubero.appconf.PimApplicationConfig;
 import de.protubero.appconf.PimApplicationModel;
-import de.protubero.views.about.AboutView;
-import de.protubero.views.helloworld.HelloWorldView;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.vaadin.lineawesome.LineAwesomeIcon;
 
 /**
  * The main view is a top-level placeholder for other views.
  */
+@RoutePrefix("page")
 public class MainLayout extends AppLayout {
 
     /**

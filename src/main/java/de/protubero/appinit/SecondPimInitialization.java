@@ -11,7 +11,7 @@ public class SecondPimInitialization implements PimInitialization {
 
 	@Override
 	public void init(PimApplicationConfig appConf) {
-		PimPage page = appConf.createPage("zwei");
+		PimPage page = appConf.createPage("zwei", DemoPageHandler.class);
 		
 		appConf.menuItem("Zwei", page);
 	}
