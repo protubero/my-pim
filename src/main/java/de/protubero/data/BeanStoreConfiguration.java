@@ -1,22 +1,18 @@
-package de.protubero;
+package de.protubero.data;
 
 import java.io.File;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.type.filter.AnnotationTypeFilter;
+
+import com.esotericsoftware.kryo.kryo5.Serializer;
+import com.esotericsoftware.kryo.kryo5.serializers.DefaultSerializers.EnumSerializer;
 
 import de.protubero.beanstore.api.BeanStore;
 import de.protubero.beanstore.api.BeanStoreFactory;
-import de.protubero.beanstore.base.entity.AbstractEntity;
-import de.protubero.beanstore.base.entity.Entity;
-import de.protubero.data.Task;
 
 @Configuration
 public class BeanStoreConfiguration {
@@ -29,11 +25,16 @@ public class BeanStoreConfiguration {
 		log.info("Create Bean Store");
 		File dataFile = new File("c:/work/tasks.kryo");
 		BeanStoreFactory factory = BeanStoreFactory.of(dataFile);
+		factory.registerEntity(Task.class);
+		factory.kryoConfig().register(Priority.class, (Serializer) new EnumSerializer(Priority.class), 303);
 		factory.initNewStore(tx -> {
 			Task newTask = tx.create(Task.class);
-			newTask.setText("Hello World");
+			newTask.setText("Eat lunch");
+			newTask.setCreatedAt(LocalDateTime.now());
+			newTask.setPriority(Priority.Today);
 		});
 
+		/*
 		ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
 		provider.addIncludeFilter(new AnnotationTypeFilter(Entity.class));
 
@@ -48,6 +49,7 @@ public class BeanStoreConfiguration {
 				}
 			}
 		}
+		*/
 
 		return factory.create();
 	}

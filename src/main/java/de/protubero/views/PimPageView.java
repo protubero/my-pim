@@ -1,7 +1,5 @@
 package de.protubero.views;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.AttachEvent;
@@ -9,10 +7,11 @@ import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEnterEvent;
 import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.RouteParameters;
 
 import de.protubero.appconf.PimApplicationModel;
 import de.protubero.appconf.PimDataModel;
-import de.protubero.appconf.PimPage;
 
 public abstract class PimPageView extends VerticalLayout implements BeforeEnterObserver {
 
@@ -26,29 +25,26 @@ public abstract class PimPageView extends VerticalLayout implements BeforeEnterO
 
 	@Autowired
 	protected PimDataModel dataModel;
-	
-	protected PimPage page;
-	protected Optional<String> pageParam;
 
+	protected RouteParameters routeParameters;
 
 	public PimPageView() {
 	}
 
+	public abstract String pageTitle();
+	
 	@Override
 	public void beforeEnter(BeforeEnterEvent event) {
-		String pageAlias = event.getRouteParameters().get("pageAlias").get();
-		Optional<PimPage> pageOpt = appModel.pageByAlias(pageAlias);
-		if (pageOpt.isEmpty()) {
-			throw new RuntimeException("invalid page alias " + pageAlias);
-		}
-		page = pageOpt.get();
-		
-	   pageParam = event.getRouteParameters().get("pageParam");
+		routeParameters = event.getRouteParameters();
+		beforeEnter();
 	}
 
+	public void beforeEnter() {
+		
+	}
+	
 	@Override
 	protected void onAttach(AttachEvent attachEvent) {
-		render();
 	}
 
 	public abstract void render();

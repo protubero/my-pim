@@ -1,7 +1,5 @@
 package de.protubero.views;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -10,11 +8,11 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Header;
 import com.vaadin.flow.component.orderedlayout.Scroller;
+import com.vaadin.flow.component.sidenav.SideNav;
+import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RoutePrefix;
 import com.vaadin.flow.theme.lumo.LumoUtility;
-
-import de.protubero.appconf.PimApplicationModel;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -29,16 +27,15 @@ public class MainLayout extends AppLayout {
 	
 	private H2 viewTitle;
 	
-	private PimApplicationModel model;
+//	private PimApplicationModel model;
 	
-    public MainLayout(@Autowired PimApplicationModel model) {
-    	this.model = model;
-    	
+    public MainLayout() {
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
     }
 
+    
     @Override
     protected void onAttach(AttachEvent attachEvent) {
     }
@@ -49,7 +46,7 @@ public class MainLayout extends AppLayout {
 
         viewTitle = new H2();
         viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
-
+        
         addToNavbar(true, toggle, viewTitle);
     }
 
@@ -57,8 +54,12 @@ public class MainLayout extends AppLayout {
         H1 appName = new H1("MyPim");
         appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
         Header header = new Header(appName);
-
-        Scroller scroller = new Scroller(model.createNavigation());
+        
+        SideNav nav = new SideNav();
+        nav.addItem(new SideNavItem("Home", HomePageView.class));
+        nav.addItem(new SideNavItem("Tasks", TaskListPageView.class));
+		        
+        Scroller scroller = new Scroller(nav);
 
         addToDrawer(header, scroller, createFooter());
     }
@@ -72,12 +73,19 @@ public class MainLayout extends AppLayout {
 
     @Override
     protected void afterNavigation() {
+    	System.out.println("after navigation");
         super.afterNavigation();
         viewTitle.setText(getCurrentPageTitle());
     }
 
+    
+    
     private String getCurrentPageTitle() {
-        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
-        return title == null ? "" : title.value();
+    	if (getContent() instanceof PimPageView) {
+    		return ((PimPageView) getContent()).pageTitle();
+    	} else {
+	        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
+	        return title == null ? "" : title.value();
+    	}    
     }
 }

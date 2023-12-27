@@ -39,7 +39,7 @@ public class ApplicationServiceInitListener implements VaadinServiceInitListener
 		PimApplicationConfig appConf = new PimApplicationConfig();
 		initList.forEach(init -> init.init(appConf));
 		
-		log.info("Init Applicatuion Model");
+		log.info("Init Application Model");
 		model.init(appConf);
 
 		log.info("Create Routes");

@@ -1,22 +1,14 @@
-	
-Abstraction Layer
-	Menus
-	https://vaadin.com/docs/latest/routing/dynamic
-		
-	Pages
-		ComponentListPage
-		
-	Components (expandable flag)	
-		ToDoItem
-		Section
-		Page Context Renderer
-		List Pages
-			table
-			expanded
-		Single Item Pages
-		Tag-based single Item Pages
-	Editors
-	Viewers	
+
+Milestone 1
+	ToDo Manager 
+		Category Enum -> Badge or Section or Tab 
+		Search
+		Find Deleted
+
+Milestone 2 
+	Note Manager
+		MD
+
 ------------------------------			
 		
 Tag Managing
@@ -44,7 +36,6 @@ Markdown extensions
 
 
 Generate PDF
-
 
 Static Site Generation
 	GraphQL?
