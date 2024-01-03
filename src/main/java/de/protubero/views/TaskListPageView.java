@@ -1,18 +1,17 @@
 package de.protubero.views;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.atmosphere.interceptor.InvokationOrder.PRIORITY;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -23,7 +22,7 @@ import jakarta.annotation.PostConstruct;
 
 @PageTitle("Tasks")
 @Route(value = "tasks", layout = MainLayout.class)
-public class TaskListPageView extends PimPageView {
+public class TaskListPageView extends VerticalLayout {
 
 	/**
 	 * 
@@ -35,6 +34,9 @@ public class TaskListPageView extends PimPageView {
 
 	private Priority selectedPriority = Priority.Today;
 	
+	@Autowired
+	private MainViewBus mainViewBus;
+	
 	private VerticalLayout taskList = new VerticalLayout();
 	
 	@PostConstruct
@@ -43,10 +45,16 @@ public class TaskListPageView extends PimPageView {
 		HorizontalLayout priorityButtonLayout = new HorizontalLayout();		
 		for (Priority priority : Priority.values()) {
 			Button priorityButton = new Button(priority.name());
+			priorityButton.setDisableOnClick(true);			
 			priorityButton.addClickListener(evt -> {
 				if (priority != selectedPriority) {
 					selectedPriority = priority;
 					renderTaskList();
+					priorityButtonLayout.getChildren().forEach(component -> {
+						if (component instanceof Button && component != priorityButton) {
+							((Button) component).setEnabled(true);
+						}
+					});
 				}	
 			});
 			priorityButton.addThemeVariants(ButtonVariant.LUMO_SMALL);
@@ -82,13 +90,22 @@ public class TaskListPageView extends PimPageView {
 	}
 
 	private void renderTaskList() {
+		mainViewBus.getMainView().setPageTitle("Tasks (" + selectedPriority.name() + ")");
+		
 		taskList.removeAll();
 		List<Task> tasks = dataModel.tasksByPriority(selectedPriority);		
 		
 		for (Task task : tasks) {
+			HorizontalLayout checkBoxLayout = new HorizontalLayout();
 			Checkbox checkbox = createCheckbox(task);
+			Icon trashIcon = VaadinIcon.TRASH.create();
+			trashIcon.addClickListener(evt -> {
+				dataModel.delete(task);
+				taskList.remove(checkBoxLayout);
+			});
+			checkBoxLayout.add(checkbox, trashIcon);
 
-			taskList.add(checkbox);
+			taskList.add(checkBoxLayout);
 		}
 	}
 
@@ -99,7 +116,6 @@ public class TaskListPageView extends PimPageView {
 		if (isCompleted != null) {
 			checkbox.setValue(isCompleted);
 		}
-		checkbox.setTooltipText(task.id().toString());
 		
 		checkbox.addValueChangeListener(event -> {
 			if (event.getValue().booleanValue()) {
@@ -112,18 +128,6 @@ public class TaskListPageView extends PimPageView {
 		return checkbox;
 	}
 
-
-
-	@Override
-	public String pageTitle() {
-		return "Tasks";
-	}
-
-	@Override
-	public void render() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 

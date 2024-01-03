@@ -29,7 +29,8 @@ public class MainLayout extends AppLayout {
 	
 //	private PimApplicationModel model;
 	
-    public MainLayout() {
+    public MainLayout(MainViewBus mainViewBus) {
+    	mainViewBus.setMainView(this);
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -73,19 +74,19 @@ public class MainLayout extends AppLayout {
 
     @Override
     protected void afterNavigation() {
-    	System.out.println("after navigation");
         super.afterNavigation();
-        viewTitle.setText(getCurrentPageTitle());
+//        viewTitle.setText(getCurrentPageTitle());
     }
 
     
     
     private String getCurrentPageTitle() {
-    	if (getContent() instanceof PimPageView) {
-    		return ((PimPageView) getContent()).pageTitle();
-    	} else {
-	        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
-	        return title == null ? "" : title.value();
-    	}    
+        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
+        return title == null ? "" : title.value();
     }
+
+
+	public void setPageTitle(String pageTitle) {
+        viewTitle.setText(pageTitle);
+	}
 }

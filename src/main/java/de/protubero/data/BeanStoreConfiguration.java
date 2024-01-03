@@ -12,7 +12,7 @@ import com.esotericsoftware.kryo.kryo5.Serializer;
 import com.esotericsoftware.kryo.kryo5.serializers.DefaultSerializers.EnumSerializer;
 
 import de.protubero.beanstore.api.BeanStore;
-import de.protubero.beanstore.api.BeanStoreFactory;
+import de.protubero.beanstore.factory.BeanStoreFactory;
 
 @Configuration
 public class BeanStoreConfiguration {
@@ -34,22 +34,6 @@ public class BeanStoreConfiguration {
 			newTask.setPriority(Priority.Today);
 		});
 
-		/*
-		ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
-		provider.addIncludeFilter(new AnnotationTypeFilter(Entity.class));
-
-		Set<BeanDefinition> beanDefs = provider.findCandidateComponents("de.protubero.data");
-		for (BeanDefinition bd : beanDefs) {
-			if (bd instanceof AnnotatedBeanDefinition) {
-				try {
-					Class<? extends AbstractEntity> cls = (Class<? extends AbstractEntity>) Class.forName(bd.getBeanClassName());
-					factory.registerEntity(cls);
-				} catch (ClassNotFoundException e) {
-					throw new RuntimeException("Entity class not found", e);
-				}
-			}
-		}
-		*/
 
 		return factory.create();
 	}
